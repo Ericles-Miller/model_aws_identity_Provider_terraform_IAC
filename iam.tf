@@ -41,6 +41,29 @@ resource "aws_iam_role" "ecr_role" {
     ]
   })
 
+  inline_policy {
+    name = "ecr-app-permissions"
+    policy = jsonencode({
+      Statement = [
+        {
+          Sid = "Statement1"
+          Action = [
+            "ecr:GetDownloadUrlForLayer",
+            "ecr:BatchGetImage",
+            "ecr:BatchCheckLayerAvailability",
+            "ecr:PutImage",
+            "ecr:InitiateLayerUpload",
+            "ecr:UploadLayerPart",
+            "ecr:CompleteLayerUpload",
+            "ecr:GetAuthorizationToken",
+          ]
+          Effect   = "Allow"
+          Resource = "*"
+        }
+      ]
+    })
+  }
+
   tags = {
     IAC = "true"
   }
