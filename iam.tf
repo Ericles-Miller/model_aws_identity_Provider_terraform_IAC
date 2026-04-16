@@ -32,7 +32,6 @@ resource "aws_iam_role" "ecr_role" {
                 },
                 "StringLike": {
                     "token.actions.githubusercontent.com:sub": [
-                        "repo:Ericles-Miller/nestjs-ci-api:ref:refs/heads/main",
                         "repo:Ericles-Miller/nestjs-ci-api:ref:refs/heads/main"
                     ]
                 }
