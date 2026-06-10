@@ -5,17 +5,23 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   run-terraform:
     name: 'Run terraform'
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-2
-          role-to-assume: ''
+          role-to-assume: arn:aws:iam::779257801295:role/tf-role
 
       - name: Setup terraform
         uses: 'hashicorp/setup-terraform@v3'
